@@ -24,7 +24,8 @@ type expr =
   | Eunop of unop * expr
 
 and stmt =
-  | Sif of expr * stmt * stmt
+  | Sif of expr * stmt
+  | Sife of expr * stmt * stmt
   | Svar of id * expr
   | Sprint of expr
   | Sforeach of id * expr * stmt

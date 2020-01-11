@@ -6,10 +6,11 @@
 
 %token <Ast.cnstt> CST
 %token <Ast.binop> CMP
+%token <Ast.ty> TYPE
 %token <string> ID
-%token IF THEN ELSE PRINT FOREACH IN DO DDOT || && FILLED BY OF
+%token IF THEN ELSE PRINT FOREACH IN DO DDOT OR AND FILLED BY OF
 %token EOF 
-%token LP RP LSB RSB LCB RCB EQUALS VAR TYPE SEMICOLON COLON COLONEQ
+%token LP RP LSB RSB LCB RCB EQUALS VAR COLON SEMICOLON COLONEQ
 %token PLUS MINUS TIMES DIV
 
 (* Prioridades *)
@@ -25,7 +26,7 @@
 %start prog
 
 (* Type of Abstract Syntax Tree *)
-%type <Ast.file> prog
+%type <Ast.prog> prog
 
 %%
 
@@ -38,7 +39,7 @@ expr:
 | c = CST
   { Ecst c }
 | var = id
-  { Eident id }
+  { Eident var }
 | MINUS e1 = expr %prec unary_minus
   { Eunop (Uneg, e1) }
 | e1 = expr o = binop e2 = expr
@@ -53,22 +54,21 @@ stmt:
 | IF c = expr THEN LCB r1 = routine RCB ELSE LCB r2 = routine RCB
   { Sife (c, r1, r2) }
 | FOREACH x = id IN e = expr DO LCB r = routine RCB
-  { Sfor (x, e, r) }
+  { Sforeach (x, e, r) }
 ;
 
 routine:
 | VAR x = id COLON ty = TYPE EQUALS e = expr SEMICOLON
-  { Svar (x, e) }
-| x = ID COLONEQ e = expr SEMICOLON
-  { Sind (x, e, s) }
+  { Svar (x, ty, e) }
+| x = id COLONEQ e = expr SEMICOLON
+  { Sind (x, e) }
 | PRINT LP e = expr RP SEMICOLON
   { Sprint e }
 ;
 
 id:
-  id = ID { id }
+  ident = ID { ident }
 ;
-
 
 %inline binop:
 | PLUS  { Badd }
@@ -76,8 +76,8 @@ id:
 | TIMES { Bmul }
 | DIV   { Bdiv }
 | c=CMP { c    }
-| &&    { Band }
-| ||    { Bor  }
+| AND    { Band }
+| OR    { Bor  }
 ;
 
 

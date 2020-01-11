@@ -3,6 +3,8 @@
 
 type id = string
 
+type ty = string
+
 type unop =
   | Uneg | Unot
 
@@ -26,9 +28,9 @@ type expr =
 and stmt =
   | Sif of expr * stmt
   | Sife of expr * stmt * stmt
-  | Svar of id * expr
+  | Svar of id * ty * expr
   | Sprint of expr
   | Sforeach of id * expr * stmt
-  | Sind of id * expr * expr
+  | Sind of id * expr
 
 and prog = stmt list

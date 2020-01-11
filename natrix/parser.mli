@@ -3,7 +3,7 @@
 
 type token = 
   | VAR
-  | TYPE
+  | TYPE of (Ast.ty)
   | TIMES
   | THEN
   | SEMICOLON
@@ -42,4 +42,4 @@ exception Error
 
 (* The monolithic API. *)
 
-val prog: (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (Ast.file)
+val prog: (Lexing.lexbuf -> token) -> Lexing.lexbuf -> (Ast.prog)

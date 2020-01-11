@@ -21,3 +21,9 @@ natrix: $(CMO)
 
 .mly.mli:
 	menhir -v $<
+
+.depend depend:$(GENERATED)
+	rm -f .depend
+	ocamldep *.ml *.mli > .depend
+
+include .depend

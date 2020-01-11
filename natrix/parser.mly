@@ -6,11 +6,10 @@
 
 %token <Ast.cnstt> CST
 %token <Ast.binop> CMP
-%token <Ast.ty> TYPE
 %token <string> ID
 %token IF THEN ELSE PRINT FOREACH IN DO DDOT OR AND FILLED BY OF
 %token EOF 
-%token LP RP LSB RSB LCB RCB EQUALS VAR COLON SEMICOLON COLONEQ
+%token TYPE INT LP RP LSB RSB LCB RCB EQUALS VAR COLON SEMICOLON COLONEQ
 %token PLUS MINUS TIMES DIV
 
 (* Prioridades *)
@@ -58,13 +57,19 @@ stmt:
 ;
 
 routine:
-| VAR x = id COLON ty = TYPE EQUALS e = expr SEMICOLON
+| VAR x = id COLON ty = mytypes EQUALS e = expr SEMICOLON
   { Svar (x, ty, e) }
 | x = id COLONEQ e = expr SEMICOLON
   { Sind (x, e) }
 | PRINT LP e = expr RP SEMICOLON
   { Sprint e }
 ;
+
+mytypes:
+| INT
+  { Uint }
+| t = id
+  { Uid t }
 
 id:
   ident = ID { ident }

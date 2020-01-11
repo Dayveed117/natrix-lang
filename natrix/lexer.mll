@@ -13,6 +13,7 @@
     List.iter (fun (s, tok) -> Hashtbl.add h s tok)
       ["var", VAR;
        "type", TYPE;
+       "int", INT;
        "if", IF;
        "else", ELSE;
        "print", PRINT;
@@ -24,7 +25,7 @@
        "of", OF;
        "true", CST (Cbool true);
        "false", CST (Cbool false);];
-   fun s -> try Hashtbl.find h s with Not_found -> IDENT s
+   fun s -> try Hashtbl.find h s with Not_found -> ID s
 
    let string_buffer = Buffer.create 1024
 
@@ -40,7 +41,7 @@ let comment = "//" [^'\n']*
 
 
 rule next_tokens = parse
-  | '\n'    { new_line lexbuf; token lexbuf }
+  | '\n'    { new_line lexbuf; next_tokens lexbuf }
   | (space | comment)+
             { next_tokens lexbuf }
   | ident as id { [id_or_kwd id] }
@@ -53,19 +54,18 @@ rule next_tokens = parse
   | ".."    { [DDOT] }
   | ';'     { [SEMICOLON] }
   | "!="    { [CMP Bneq] }
-  | "&&"    { [CMP AND] }
-  | "||"    { [CMP OR] }
+  | "&&"    { [CMP Band] }
+  | "||"    { [CMP Bor] }
   | "<"     { [CMP Blt] }
   | "<="    { [CMP Ble] }
   | ">"     { [CMP Bgt] }
   | ">="    { [CMP Bge] }
   | '('     { [LP] }
   | ')'     { [RP] }
-  | '['     { [LSQ] }
-  | ']'     { [RSQ] }
+  | '['     { [LSB] }
+  | ']'     { [RSB] }
   | '{'     { [LCB] }
   | '}'     { [RCB] }
-  | ','     { [COMMA] }
   | integer as s
             { try [CST (Cint (int_of_string s))]
               with _ -> raise (Lexing_error ("constant too large: " ^ s)) }

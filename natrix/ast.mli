@@ -3,10 +3,12 @@
 
 type id = string
 
-type ty = string
-
 type unop =
-  | Uneg | Unot
+  | Uneg 
+
+type utypes = 
+  | Uint
+  | Uid of id
 
 type binop =
   | Badd | Bsub | Bmul | Bdiv
@@ -28,9 +30,9 @@ type expr =
 and stmt =
   | Sif of expr * stmt
   | Sife of expr * stmt * stmt
-  | Svar of id * ty * expr
-  | Sprint of expr
   | Sforeach of id * expr * stmt
+  | Svar of id * utypes * expr
   | Sind of id * expr
-
+  | Sprint of expr
+  
 and prog = stmt list

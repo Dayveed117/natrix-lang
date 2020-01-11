@@ -3,7 +3,7 @@
 
 type token = 
   | VAR
-  | TYPE of (Ast.ty)
+  | TYPE
   | TIMES
   | THEN
   | SEMICOLON
@@ -18,6 +18,7 @@ type token =
   | LSB
   | LP
   | LCB
+  | INT
   | IN
   | IF
   | ID of (string)

@@ -3,49 +3,49 @@ prog' -> . prog [ # ]
 -- On VAR shift to state 1
 -- On PRINT shift to state 27
 -- On IF shift to state 32
--- On ID shift to state 35
--- On FOREACH shift to state 45
--- On stmt shift to state 53
--- On routine shift to state 54
--- On prog shift to state 56
--- On list(stmt) shift to state 57
+-- On ID shift to state 36
+-- On FOREACH shift to state 46
+-- On stmt shift to state 54
+-- On routine shift to state 55
+-- On prog shift to state 57
+-- On list(stmt) shift to state 58
 -- On EOF reduce production list(stmt) -> 
 
 State 1:
-routine -> VAR . id DOUBLEDOT TYPE EQUALS expr SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
+routine -> VAR . id COLON TYPE EQUALS expr SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
 -- On ID shift to state 2
 -- On id shift to state 3
 
 State 2:
-id -> ID . [ TIMES SEMICOLON RP PLUS OR MINUS LCB IN DOUBLEDOT DO DIV CMP AND ]
+id -> ID . [ TIMES THEN SEMICOLON RP PLUS OR MINUS IN DO DIV COLON CMP AND ]
 -- On TIMES reduce production id -> ID 
+-- On THEN reduce production id -> ID 
 -- On SEMICOLON reduce production id -> ID 
 -- On RP reduce production id -> ID 
 -- On PLUS reduce production id -> ID 
 -- On OR reduce production id -> ID 
 -- On MINUS reduce production id -> ID 
--- On LCB reduce production id -> ID 
 -- On IN reduce production id -> ID 
--- On DOUBLEDOT reduce production id -> ID 
 -- On DO reduce production id -> ID 
 -- On DIV reduce production id -> ID 
+-- On COLON reduce production id -> ID 
 -- On CMP reduce production id -> ID 
 -- On AND reduce production id -> ID 
 
 State 3:
-routine -> VAR id . DOUBLEDOT TYPE EQUALS expr SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
--- On DOUBLEDOT shift to state 4
+routine -> VAR id . COLON TYPE EQUALS expr SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
+-- On COLON shift to state 4
 
 State 4:
-routine -> VAR id DOUBLEDOT . TYPE EQUALS expr SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
+routine -> VAR id COLON . TYPE EQUALS expr SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
 -- On TYPE shift to state 5
 
 State 5:
-routine -> VAR id DOUBLEDOT TYPE . EQUALS expr SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
+routine -> VAR id COLON TYPE . EQUALS expr SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
 -- On EQUALS shift to state 6
 
 State 6:
-routine -> VAR id DOUBLEDOT TYPE EQUALS . expr SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
+routine -> VAR id COLON TYPE EQUALS . expr SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
 -- On MINUS shift to state 7
 -- On ID shift to state 2
 -- On CST shift to state 8
@@ -53,7 +53,7 @@ routine -> VAR id DOUBLEDOT TYPE EQUALS . expr SEMICOLON [ VAR RCB PRINT IF ID F
 -- On expr shift to state 19
 
 State 7:
-expr -> MINUS . expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> MINUS . expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On MINUS shift to state 7
 -- On ID shift to state 2
 -- On CST shift to state 8
@@ -61,56 +61,56 @@ expr -> MINUS . expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
 -- On expr shift to state 10
 
 State 8:
-expr -> CST . [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> CST . [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On TIMES reduce production expr -> CST 
+-- On THEN reduce production expr -> CST 
 -- On SEMICOLON reduce production expr -> CST 
 -- On RP reduce production expr -> CST 
 -- On PLUS reduce production expr -> CST 
 -- On OR reduce production expr -> CST 
 -- On MINUS reduce production expr -> CST 
--- On LCB reduce production expr -> CST 
 -- On DO reduce production expr -> CST 
 -- On DIV reduce production expr -> CST 
 -- On CMP reduce production expr -> CST 
 -- On AND reduce production expr -> CST 
 
 State 9:
-expr -> id . [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> id . [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On TIMES reduce production expr -> id 
+-- On THEN reduce production expr -> id 
 -- On SEMICOLON reduce production expr -> id 
 -- On RP reduce production expr -> id 
 -- On PLUS reduce production expr -> id 
 -- On OR reduce production expr -> id 
 -- On MINUS reduce production expr -> id 
--- On LCB reduce production expr -> id 
 -- On DO reduce production expr -> id 
 -- On DIV reduce production expr -> id 
 -- On CMP reduce production expr -> id 
 -- On AND reduce production expr -> id 
 
 State 10:
-expr -> MINUS expr . [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . PLUS expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . MINUS expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . TIMES expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . DIV expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . CMP expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . AND expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . OR expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> MINUS expr . [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . PLUS expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . AND expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . OR expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On TIMES shift to state 11
 -- On PLUS shift to state 13
 -- On MINUS shift to state 17
 -- On DIV shift to state 15
+-- On THEN reduce production expr -> MINUS expr 
 -- On SEMICOLON reduce production expr -> MINUS expr 
 -- On RP reduce production expr -> MINUS expr 
 -- On OR reduce production expr -> MINUS expr 
--- On LCB reduce production expr -> MINUS expr 
 -- On DO reduce production expr -> MINUS expr 
 -- On CMP reduce production expr -> MINUS expr 
 -- On AND reduce production expr -> MINUS expr 
 
 State 11:
-expr -> expr TIMES . expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> expr TIMES . expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On MINUS shift to state 7
 -- On ID shift to state 2
 -- On CST shift to state 8
@@ -118,28 +118,28 @@ expr -> expr TIMES . expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND 
 -- On expr shift to state 12
 
 State 12:
-expr -> expr . PLUS expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . MINUS expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . TIMES expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr TIMES expr . [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . DIV expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . CMP expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . AND expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . OR expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> expr . PLUS expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr TIMES expr . [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . AND expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . OR expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On TIMES reduce production expr -> expr TIMES expr 
+-- On THEN reduce production expr -> expr TIMES expr 
 -- On SEMICOLON reduce production expr -> expr TIMES expr 
 -- On RP reduce production expr -> expr TIMES expr 
 -- On PLUS reduce production expr -> expr TIMES expr 
 -- On OR reduce production expr -> expr TIMES expr 
 -- On MINUS reduce production expr -> expr TIMES expr 
--- On LCB reduce production expr -> expr TIMES expr 
 -- On DO reduce production expr -> expr TIMES expr 
 -- On DIV reduce production expr -> expr TIMES expr 
 -- On CMP reduce production expr -> expr TIMES expr 
 -- On AND reduce production expr -> expr TIMES expr 
 
 State 13:
-expr -> expr PLUS . expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> expr PLUS . expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On MINUS shift to state 7
 -- On ID shift to state 2
 -- On CST shift to state 8
@@ -147,28 +147,28 @@ expr -> expr PLUS . expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
 -- On expr shift to state 14
 
 State 14:
-expr -> expr . PLUS expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr PLUS expr . [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . MINUS expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . TIMES expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . DIV expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . CMP expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . AND expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . OR expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> expr . PLUS expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr PLUS expr . [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . AND expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . OR expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On TIMES shift to state 11
 -- On DIV shift to state 15
+-- On THEN reduce production expr -> expr PLUS expr 
 -- On SEMICOLON reduce production expr -> expr PLUS expr 
 -- On RP reduce production expr -> expr PLUS expr 
 -- On PLUS reduce production expr -> expr PLUS expr 
 -- On OR reduce production expr -> expr PLUS expr 
 -- On MINUS reduce production expr -> expr PLUS expr 
--- On LCB reduce production expr -> expr PLUS expr 
 -- On DO reduce production expr -> expr PLUS expr 
 -- On CMP reduce production expr -> expr PLUS expr 
 -- On AND reduce production expr -> expr PLUS expr 
 
 State 15:
-expr -> expr DIV . expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> expr DIV . expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On MINUS shift to state 7
 -- On ID shift to state 2
 -- On CST shift to state 8
@@ -176,28 +176,28 @@ expr -> expr DIV . expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
 -- On expr shift to state 16
 
 State 16:
-expr -> expr . PLUS expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . MINUS expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . TIMES expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . DIV expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr DIV expr . [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . CMP expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . AND expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . OR expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> expr . PLUS expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr DIV expr . [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . AND expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . OR expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On TIMES reduce production expr -> expr DIV expr 
+-- On THEN reduce production expr -> expr DIV expr 
 -- On SEMICOLON reduce production expr -> expr DIV expr 
 -- On RP reduce production expr -> expr DIV expr 
 -- On PLUS reduce production expr -> expr DIV expr 
 -- On OR reduce production expr -> expr DIV expr 
 -- On MINUS reduce production expr -> expr DIV expr 
--- On LCB reduce production expr -> expr DIV expr 
 -- On DO reduce production expr -> expr DIV expr 
 -- On DIV reduce production expr -> expr DIV expr 
 -- On CMP reduce production expr -> expr DIV expr 
 -- On AND reduce production expr -> expr DIV expr 
 
 State 17:
-expr -> expr MINUS . expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> expr MINUS . expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On MINUS shift to state 7
 -- On ID shift to state 2
 -- On CST shift to state 8
@@ -205,22 +205,22 @@ expr -> expr MINUS . expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND 
 -- On expr shift to state 18
 
 State 18:
-expr -> expr . PLUS expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . MINUS expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr MINUS expr . [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . TIMES expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . DIV expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . CMP expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . AND expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . OR expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> expr . PLUS expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr MINUS expr . [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . AND expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . OR expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On TIMES shift to state 11
 -- On DIV shift to state 15
+-- On THEN reduce production expr -> expr MINUS expr 
 -- On SEMICOLON reduce production expr -> expr MINUS expr 
 -- On RP reduce production expr -> expr MINUS expr 
 -- On PLUS reduce production expr -> expr MINUS expr 
 -- On OR reduce production expr -> expr MINUS expr 
 -- On MINUS reduce production expr -> expr MINUS expr 
--- On LCB reduce production expr -> expr MINUS expr 
 -- On DO reduce production expr -> expr MINUS expr 
 -- On CMP reduce production expr -> expr MINUS expr 
 -- On AND reduce production expr -> expr MINUS expr 
@@ -233,7 +233,7 @@ expr -> expr . DIV expr [ TIMES SEMICOLON PLUS OR MINUS DIV CMP AND ]
 expr -> expr . CMP expr [ TIMES SEMICOLON PLUS OR MINUS DIV CMP AND ]
 expr -> expr . AND expr [ TIMES SEMICOLON PLUS OR MINUS DIV CMP AND ]
 expr -> expr . OR expr [ TIMES SEMICOLON PLUS OR MINUS DIV CMP AND ]
-routine -> VAR id DOUBLEDOT TYPE EQUALS expr . SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
+routine -> VAR id COLON TYPE EQUALS expr . SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
 -- On TIMES shift to state 11
 -- On SEMICOLON shift to state 20
 -- On PLUS shift to state 13
@@ -244,17 +244,17 @@ routine -> VAR id DOUBLEDOT TYPE EQUALS expr . SEMICOLON [ VAR RCB PRINT IF ID F
 -- On AND shift to state 25
 
 State 20:
-routine -> VAR id DOUBLEDOT TYPE EQUALS expr SEMICOLON . [ VAR RCB PRINT IF ID FOREACH EOF ]
--- On VAR reduce production routine -> VAR id DOUBLEDOT TYPE EQUALS expr SEMICOLON 
--- On RCB reduce production routine -> VAR id DOUBLEDOT TYPE EQUALS expr SEMICOLON 
--- On PRINT reduce production routine -> VAR id DOUBLEDOT TYPE EQUALS expr SEMICOLON 
--- On IF reduce production routine -> VAR id DOUBLEDOT TYPE EQUALS expr SEMICOLON 
--- On ID reduce production routine -> VAR id DOUBLEDOT TYPE EQUALS expr SEMICOLON 
--- On FOREACH reduce production routine -> VAR id DOUBLEDOT TYPE EQUALS expr SEMICOLON 
--- On EOF reduce production routine -> VAR id DOUBLEDOT TYPE EQUALS expr SEMICOLON 
+routine -> VAR id COLON TYPE EQUALS expr SEMICOLON . [ VAR RCB PRINT IF ID FOREACH EOF ]
+-- On VAR reduce production routine -> VAR id COLON TYPE EQUALS expr SEMICOLON 
+-- On RCB reduce production routine -> VAR id COLON TYPE EQUALS expr SEMICOLON 
+-- On PRINT reduce production routine -> VAR id COLON TYPE EQUALS expr SEMICOLON 
+-- On IF reduce production routine -> VAR id COLON TYPE EQUALS expr SEMICOLON 
+-- On ID reduce production routine -> VAR id COLON TYPE EQUALS expr SEMICOLON 
+-- On FOREACH reduce production routine -> VAR id COLON TYPE EQUALS expr SEMICOLON 
+-- On EOF reduce production routine -> VAR id COLON TYPE EQUALS expr SEMICOLON 
 
 State 21:
-expr -> expr OR . expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> expr OR . expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On MINUS shift to state 7
 -- On ID shift to state 2
 -- On CST shift to state 8
@@ -262,28 +262,28 @@ expr -> expr OR . expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
 -- On expr shift to state 22
 
 State 22:
-expr -> expr . PLUS expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . MINUS expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . TIMES expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . DIV expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . CMP expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . AND expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . OR expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr OR expr . [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> expr . PLUS expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . AND expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . OR expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr OR expr . [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On TIMES shift to state 11
 -- On PLUS shift to state 13
 -- On MINUS shift to state 17
 -- On DIV shift to state 15
 -- On CMP shift to state 23
 -- On AND shift to state 25
+-- On THEN reduce production expr -> expr OR expr 
 -- On SEMICOLON reduce production expr -> expr OR expr 
 -- On RP reduce production expr -> expr OR expr 
 -- On OR reduce production expr -> expr OR expr 
--- On LCB reduce production expr -> expr OR expr 
 -- On DO reduce production expr -> expr OR expr 
 
 State 23:
-expr -> expr CMP . expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> expr CMP . expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On MINUS shift to state 7
 -- On ID shift to state 2
 -- On CST shift to state 8
@@ -291,27 +291,27 @@ expr -> expr CMP . expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
 -- On expr shift to state 24
 
 State 24:
-expr -> expr . PLUS expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . MINUS expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . TIMES expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . DIV expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . CMP expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr CMP expr . [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . AND expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . OR expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> expr . PLUS expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr CMP expr . [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . AND expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . OR expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On TIMES shift to state 11
 -- On PLUS shift to state 13
 -- On MINUS shift to state 17
 -- On DIV shift to state 15
+-- On THEN reduce production expr -> expr CMP expr 
 -- On SEMICOLON reduce production expr -> expr CMP expr 
 -- On RP reduce production expr -> expr CMP expr 
 -- On OR reduce production expr -> expr CMP expr 
--- On LCB reduce production expr -> expr CMP expr 
 -- On DO reduce production expr -> expr CMP expr 
 -- On AND reduce production expr -> expr CMP expr 
 
 State 25:
-expr -> expr AND . expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> expr AND . expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On MINUS shift to state 7
 -- On ID shift to state 2
 -- On CST shift to state 8
@@ -319,23 +319,23 @@ expr -> expr AND . expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
 -- On expr shift to state 26
 
 State 26:
-expr -> expr . PLUS expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . MINUS expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . TIMES expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . DIV expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . CMP expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . AND expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr AND expr . [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
-expr -> expr . OR expr [ TIMES SEMICOLON RP PLUS OR MINUS LCB DO DIV CMP AND ]
+expr -> expr . PLUS expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . AND expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr AND expr . [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
+expr -> expr . OR expr [ TIMES THEN SEMICOLON RP PLUS OR MINUS DO DIV CMP AND ]
 -- On TIMES shift to state 11
 -- On PLUS shift to state 13
 -- On MINUS shift to state 17
 -- On DIV shift to state 15
 -- On CMP shift to state 23
+-- On THEN reduce production expr -> expr AND expr 
 -- On SEMICOLON reduce production expr -> expr AND expr 
 -- On RP reduce production expr -> expr AND expr 
 -- On OR reduce production expr -> expr AND expr 
--- On LCB reduce production expr -> expr AND expr 
 -- On DO reduce production expr -> expr AND expr 
 -- On AND reduce production expr -> expr AND expr 
 
@@ -384,8 +384,8 @@ routine -> PRINT LP expr RP SEMICOLON . [ VAR RCB PRINT IF ID FOREACH EOF ]
 -- On EOF reduce production routine -> PRINT LP expr RP SEMICOLON 
 
 State 32:
-stmt -> IF . expr LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
-stmt -> IF . expr LCB routine RCB ELSE LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
+stmt -> IF . expr THEN LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
+stmt -> IF . expr THEN LCB routine RCB ELSE LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
 -- On MINUS shift to state 7
 -- On ID shift to state 2
 -- On CST shift to state 8
@@ -393,45 +393,50 @@ stmt -> IF . expr LCB routine RCB ELSE LCB routine RCB [ VAR PRINT IF ID FOREACH
 -- On expr shift to state 33
 
 State 33:
-expr -> expr . PLUS expr [ TIMES PLUS OR MINUS LCB DIV CMP AND ]
-expr -> expr . MINUS expr [ TIMES PLUS OR MINUS LCB DIV CMP AND ]
-expr -> expr . TIMES expr [ TIMES PLUS OR MINUS LCB DIV CMP AND ]
-expr -> expr . DIV expr [ TIMES PLUS OR MINUS LCB DIV CMP AND ]
-expr -> expr . CMP expr [ TIMES PLUS OR MINUS LCB DIV CMP AND ]
-expr -> expr . AND expr [ TIMES PLUS OR MINUS LCB DIV CMP AND ]
-expr -> expr . OR expr [ TIMES PLUS OR MINUS LCB DIV CMP AND ]
-stmt -> IF expr . LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
-stmt -> IF expr . LCB routine RCB ELSE LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
+expr -> expr . PLUS expr [ TIMES THEN PLUS OR MINUS DIV CMP AND ]
+expr -> expr . MINUS expr [ TIMES THEN PLUS OR MINUS DIV CMP AND ]
+expr -> expr . TIMES expr [ TIMES THEN PLUS OR MINUS DIV CMP AND ]
+expr -> expr . DIV expr [ TIMES THEN PLUS OR MINUS DIV CMP AND ]
+expr -> expr . CMP expr [ TIMES THEN PLUS OR MINUS DIV CMP AND ]
+expr -> expr . AND expr [ TIMES THEN PLUS OR MINUS DIV CMP AND ]
+expr -> expr . OR expr [ TIMES THEN PLUS OR MINUS DIV CMP AND ]
+stmt -> IF expr . THEN LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
+stmt -> IF expr . THEN LCB routine RCB ELSE LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
 -- On TIMES shift to state 11
+-- On THEN shift to state 34
 -- On PLUS shift to state 13
 -- On OR shift to state 21
 -- On MINUS shift to state 17
--- On LCB shift to state 34
 -- On DIV shift to state 15
 -- On CMP shift to state 23
 -- On AND shift to state 25
 
 State 34:
-stmt -> IF expr LCB . routine RCB [ VAR PRINT IF ID FOREACH EOF ]
-stmt -> IF expr LCB . routine RCB ELSE LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
--- On VAR shift to state 1
--- On PRINT shift to state 27
--- On ID shift to state 35
--- On routine shift to state 39
+stmt -> IF expr THEN . LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
+stmt -> IF expr THEN . LCB routine RCB ELSE LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
+-- On LCB shift to state 35
 
 State 35:
-routine -> ID . DOUBLEDOTEQ expr SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
--- On DOUBLEDOTEQ shift to state 36
+stmt -> IF expr THEN LCB . routine RCB [ VAR PRINT IF ID FOREACH EOF ]
+stmt -> IF expr THEN LCB . routine RCB ELSE LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
+-- On VAR shift to state 1
+-- On PRINT shift to state 27
+-- On ID shift to state 36
+-- On routine shift to state 40
 
 State 36:
-routine -> ID DOUBLEDOTEQ . expr SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
+routine -> ID . COLONEQ expr SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
+-- On COLONEQ shift to state 37
+
+State 37:
+routine -> ID COLONEQ . expr SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
 -- On MINUS shift to state 7
 -- On ID shift to state 2
 -- On CST shift to state 8
 -- On id shift to state 9
--- On expr shift to state 37
+-- On expr shift to state 38
 
-State 37:
+State 38:
 expr -> expr . PLUS expr [ TIMES SEMICOLON PLUS OR MINUS DIV CMP AND ]
 expr -> expr . MINUS expr [ TIMES SEMICOLON PLUS OR MINUS DIV CMP AND ]
 expr -> expr . TIMES expr [ TIMES SEMICOLON PLUS OR MINUS DIV CMP AND ]
@@ -439,9 +444,9 @@ expr -> expr . DIV expr [ TIMES SEMICOLON PLUS OR MINUS DIV CMP AND ]
 expr -> expr . CMP expr [ TIMES SEMICOLON PLUS OR MINUS DIV CMP AND ]
 expr -> expr . AND expr [ TIMES SEMICOLON PLUS OR MINUS DIV CMP AND ]
 expr -> expr . OR expr [ TIMES SEMICOLON PLUS OR MINUS DIV CMP AND ]
-routine -> ID DOUBLEDOTEQ expr . SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
+routine -> ID COLONEQ expr . SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
 -- On TIMES shift to state 11
--- On SEMICOLON shift to state 38
+-- On SEMICOLON shift to state 39
 -- On PLUS shift to state 13
 -- On OR shift to state 21
 -- On MINUS shift to state 17
@@ -449,74 +454,74 @@ routine -> ID DOUBLEDOTEQ expr . SEMICOLON [ VAR RCB PRINT IF ID FOREACH EOF ]
 -- On CMP shift to state 23
 -- On AND shift to state 25
 
-State 38:
-routine -> ID DOUBLEDOTEQ expr SEMICOLON . [ VAR RCB PRINT IF ID FOREACH EOF ]
--- On VAR reduce production routine -> ID DOUBLEDOTEQ expr SEMICOLON 
--- On RCB reduce production routine -> ID DOUBLEDOTEQ expr SEMICOLON 
--- On PRINT reduce production routine -> ID DOUBLEDOTEQ expr SEMICOLON 
--- On IF reduce production routine -> ID DOUBLEDOTEQ expr SEMICOLON 
--- On ID reduce production routine -> ID DOUBLEDOTEQ expr SEMICOLON 
--- On FOREACH reduce production routine -> ID DOUBLEDOTEQ expr SEMICOLON 
--- On EOF reduce production routine -> ID DOUBLEDOTEQ expr SEMICOLON 
-
 State 39:
-stmt -> IF expr LCB routine . RCB [ VAR PRINT IF ID FOREACH EOF ]
-stmt -> IF expr LCB routine . RCB ELSE LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
--- On RCB shift to state 40
+routine -> ID COLONEQ expr SEMICOLON . [ VAR RCB PRINT IF ID FOREACH EOF ]
+-- On VAR reduce production routine -> ID COLONEQ expr SEMICOLON 
+-- On RCB reduce production routine -> ID COLONEQ expr SEMICOLON 
+-- On PRINT reduce production routine -> ID COLONEQ expr SEMICOLON 
+-- On IF reduce production routine -> ID COLONEQ expr SEMICOLON 
+-- On ID reduce production routine -> ID COLONEQ expr SEMICOLON 
+-- On FOREACH reduce production routine -> ID COLONEQ expr SEMICOLON 
+-- On EOF reduce production routine -> ID COLONEQ expr SEMICOLON 
 
 State 40:
-stmt -> IF expr LCB routine RCB . [ VAR PRINT IF ID FOREACH EOF ]
-stmt -> IF expr LCB routine RCB . ELSE LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
--- On ELSE shift to state 41
--- On VAR reduce production stmt -> IF expr LCB routine RCB 
--- On PRINT reduce production stmt -> IF expr LCB routine RCB 
--- On IF reduce production stmt -> IF expr LCB routine RCB 
--- On ID reduce production stmt -> IF expr LCB routine RCB 
--- On FOREACH reduce production stmt -> IF expr LCB routine RCB 
--- On EOF reduce production stmt -> IF expr LCB routine RCB 
+stmt -> IF expr THEN LCB routine . RCB [ VAR PRINT IF ID FOREACH EOF ]
+stmt -> IF expr THEN LCB routine . RCB ELSE LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
+-- On RCB shift to state 41
 
 State 41:
-stmt -> IF expr LCB routine RCB ELSE . LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
--- On LCB shift to state 42
+stmt -> IF expr THEN LCB routine RCB . [ VAR PRINT IF ID FOREACH EOF ]
+stmt -> IF expr THEN LCB routine RCB . ELSE LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
+-- On ELSE shift to state 42
+-- On VAR reduce production stmt -> IF expr THEN LCB routine RCB 
+-- On PRINT reduce production stmt -> IF expr THEN LCB routine RCB 
+-- On IF reduce production stmt -> IF expr THEN LCB routine RCB 
+-- On ID reduce production stmt -> IF expr THEN LCB routine RCB 
+-- On FOREACH reduce production stmt -> IF expr THEN LCB routine RCB 
+-- On EOF reduce production stmt -> IF expr THEN LCB routine RCB 
 
 State 42:
-stmt -> IF expr LCB routine RCB ELSE LCB . routine RCB [ VAR PRINT IF ID FOREACH EOF ]
--- On VAR shift to state 1
--- On PRINT shift to state 27
--- On ID shift to state 35
--- On routine shift to state 43
+stmt -> IF expr THEN LCB routine RCB ELSE . LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
+-- On LCB shift to state 43
 
 State 43:
-stmt -> IF expr LCB routine RCB ELSE LCB routine . RCB [ VAR PRINT IF ID FOREACH EOF ]
--- On RCB shift to state 44
+stmt -> IF expr THEN LCB routine RCB ELSE LCB . routine RCB [ VAR PRINT IF ID FOREACH EOF ]
+-- On VAR shift to state 1
+-- On PRINT shift to state 27
+-- On ID shift to state 36
+-- On routine shift to state 44
 
 State 44:
-stmt -> IF expr LCB routine RCB ELSE LCB routine RCB . [ VAR PRINT IF ID FOREACH EOF ]
--- On VAR reduce production stmt -> IF expr LCB routine RCB ELSE LCB routine RCB 
--- On PRINT reduce production stmt -> IF expr LCB routine RCB ELSE LCB routine RCB 
--- On IF reduce production stmt -> IF expr LCB routine RCB ELSE LCB routine RCB 
--- On ID reduce production stmt -> IF expr LCB routine RCB ELSE LCB routine RCB 
--- On FOREACH reduce production stmt -> IF expr LCB routine RCB ELSE LCB routine RCB 
--- On EOF reduce production stmt -> IF expr LCB routine RCB ELSE LCB routine RCB 
+stmt -> IF expr THEN LCB routine RCB ELSE LCB routine . RCB [ VAR PRINT IF ID FOREACH EOF ]
+-- On RCB shift to state 45
 
 State 45:
-stmt -> FOREACH . id IN expr DO LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
--- On ID shift to state 2
--- On id shift to state 46
+stmt -> IF expr THEN LCB routine RCB ELSE LCB routine RCB . [ VAR PRINT IF ID FOREACH EOF ]
+-- On VAR reduce production stmt -> IF expr THEN LCB routine RCB ELSE LCB routine RCB 
+-- On PRINT reduce production stmt -> IF expr THEN LCB routine RCB ELSE LCB routine RCB 
+-- On IF reduce production stmt -> IF expr THEN LCB routine RCB ELSE LCB routine RCB 
+-- On ID reduce production stmt -> IF expr THEN LCB routine RCB ELSE LCB routine RCB 
+-- On FOREACH reduce production stmt -> IF expr THEN LCB routine RCB ELSE LCB routine RCB 
+-- On EOF reduce production stmt -> IF expr THEN LCB routine RCB ELSE LCB routine RCB 
 
 State 46:
-stmt -> FOREACH id . IN expr DO LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
--- On IN shift to state 47
+stmt -> FOREACH . id IN expr DO LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
+-- On ID shift to state 2
+-- On id shift to state 47
 
 State 47:
+stmt -> FOREACH id . IN expr DO LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
+-- On IN shift to state 48
+
+State 48:
 stmt -> FOREACH id IN . expr DO LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
 -- On MINUS shift to state 7
 -- On ID shift to state 2
 -- On CST shift to state 8
 -- On id shift to state 9
--- On expr shift to state 48
+-- On expr shift to state 49
 
-State 48:
+State 49:
 expr -> expr . PLUS expr [ TIMES PLUS OR MINUS DO DIV CMP AND ]
 expr -> expr . MINUS expr [ TIMES PLUS OR MINUS DO DIV CMP AND ]
 expr -> expr . TIMES expr [ TIMES PLUS OR MINUS DO DIV CMP AND ]
@@ -529,27 +534,27 @@ stmt -> FOREACH id IN expr . DO LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
 -- On PLUS shift to state 13
 -- On OR shift to state 21
 -- On MINUS shift to state 17
--- On DO shift to state 49
+-- On DO shift to state 50
 -- On DIV shift to state 15
 -- On CMP shift to state 23
 -- On AND shift to state 25
 
-State 49:
-stmt -> FOREACH id IN expr DO . LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
--- On LCB shift to state 50
-
 State 50:
+stmt -> FOREACH id IN expr DO . LCB routine RCB [ VAR PRINT IF ID FOREACH EOF ]
+-- On LCB shift to state 51
+
+State 51:
 stmt -> FOREACH id IN expr DO LCB . routine RCB [ VAR PRINT IF ID FOREACH EOF ]
 -- On VAR shift to state 1
 -- On PRINT shift to state 27
--- On ID shift to state 35
--- On routine shift to state 51
-
-State 51:
-stmt -> FOREACH id IN expr DO LCB routine . RCB [ VAR PRINT IF ID FOREACH EOF ]
--- On RCB shift to state 52
+-- On ID shift to state 36
+-- On routine shift to state 52
 
 State 52:
+stmt -> FOREACH id IN expr DO LCB routine . RCB [ VAR PRINT IF ID FOREACH EOF ]
+-- On RCB shift to state 53
+
+State 53:
 stmt -> FOREACH id IN expr DO LCB routine RCB . [ VAR PRINT IF ID FOREACH EOF ]
 -- On VAR reduce production stmt -> FOREACH id IN expr DO LCB routine RCB 
 -- On PRINT reduce production stmt -> FOREACH id IN expr DO LCB routine RCB 
@@ -558,19 +563,19 @@ stmt -> FOREACH id IN expr DO LCB routine RCB . [ VAR PRINT IF ID FOREACH EOF ]
 -- On FOREACH reduce production stmt -> FOREACH id IN expr DO LCB routine RCB 
 -- On EOF reduce production stmt -> FOREACH id IN expr DO LCB routine RCB 
 
-State 53:
+State 54:
 list(stmt) -> stmt . list(stmt) [ EOF ]
 -- On VAR shift to state 1
 -- On PRINT shift to state 27
 -- On IF shift to state 32
--- On ID shift to state 35
--- On FOREACH shift to state 45
--- On stmt shift to state 53
--- On routine shift to state 54
--- On list(stmt) shift to state 55
+-- On ID shift to state 36
+-- On FOREACH shift to state 46
+-- On stmt shift to state 54
+-- On routine shift to state 55
+-- On list(stmt) shift to state 56
 -- On EOF reduce production list(stmt) -> 
 
-State 54:
+State 55:
 stmt -> routine . [ VAR PRINT IF ID FOREACH EOF ]
 -- On VAR reduce production stmt -> routine 
 -- On PRINT reduce production stmt -> routine 
@@ -579,19 +584,19 @@ stmt -> routine . [ VAR PRINT IF ID FOREACH EOF ]
 -- On FOREACH reduce production stmt -> routine 
 -- On EOF reduce production stmt -> routine 
 
-State 55:
+State 56:
 list(stmt) -> stmt list(stmt) . [ EOF ]
 -- On EOF reduce production list(stmt) -> stmt list(stmt) 
 
-State 56:
+State 57:
 prog' -> prog . [ # ]
 -- On # accept prog
 
-State 57:
-prog -> list(stmt) . EOF [ # ]
--- On EOF shift to state 58
-
 State 58:
+prog -> list(stmt) . EOF [ # ]
+-- On EOF shift to state 59
+
+State 59:
 prog -> list(stmt) EOF . [ # ]
 -- On # reduce production prog -> list(stmt) EOF 
 

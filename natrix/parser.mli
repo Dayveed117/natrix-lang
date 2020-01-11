@@ -5,6 +5,7 @@ type token =
   | VAR
   | TYPE
   | TIMES
+  | THEN
   | SEMICOLON
   | RSB
   | RP
@@ -21,16 +22,16 @@ type token =
   | IF
   | ID of (string)
   | FOREACH
-  | FLDOT
   | FILLED
   | EQUALS
   | EOF
   | ELSE
-  | DOUBLEDOTEQ
-  | DOUBLEDOT
   | DO
   | DIV
+  | DDOT
   | CST of (Ast.cnstt)
+  | COLONEQ
+  | COLON
   | CMP of (Ast.binop)
   | BY
   | AND

@@ -7,9 +7,9 @@
 %token <Ast.cnstt> CST
 %token <Ast.binop> CMP
 %token <string> ID
-%token IF ELSE PRINT FOREACH FLDOT IN DO OR AND FILLED BY OF
+%token IF THEN ELSE PRINT FOREACH IN DO DDOT || && FILLED BY OF
 %token EOF 
-%token LP RP LSB RSB LCB RCB SEMICOLON DOUBLEDOT DOUBLEDOTEQ EQUALS VAR TYPE
+%token LP RP LSB RSB LCB RCB EQUALS VAR TYPE SEMICOLON COLON COLONEQ
 %token PLUS MINUS TIMES DIV
 
 (* Prioridades *)
@@ -48,18 +48,18 @@ expr:
 stmt:
 | r = routine
   { r }
-| IF c = expr LCB r = routine RCB
+| IF c = expr THEN LCB r = routine RCB
   { Sif (c, r) }
-| IF c = expr LCB r1 = routine RCB ELSE LCB r2 = routine RCB
+| IF c = expr THEN LCB r1 = routine RCB ELSE LCB r2 = routine RCB
   { Sife (c, r1, r2) }
 | FOREACH x = id IN e = expr DO LCB r = routine RCB
   { Sfor (x, e, r) }
 ;
 
 routine:
-| VAR x = id DOUBLEDOT ty = TYPE EQUALS e = expr SEMICOLON
+| VAR x = id COLON ty = TYPE EQUALS e = expr SEMICOLON
   { Svar (x, e) }
-| x = ID DOUBLEDOTEQ e = expr SEMICOLON
+| x = ID COLONEQ e = expr SEMICOLON
   { Sind (x, e, s) }
 | PRINT LP e = expr RP SEMICOLON
   { Sprint e }
@@ -76,8 +76,8 @@ id:
 | TIMES { Bmul }
 | DIV   { Bdiv }
 | c=CMP { c    }
-| AND   { Band }
-| OR    { Bor  }
+| &&    { Band }
+| ||    { Bor  }
 ;
 
 

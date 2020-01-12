@@ -1,3 +1,5 @@
+compilador.cmo :
+compilador.cmx :
 interpretador.cmo : ast.cmi
 interpretador.cmx : ast.cmi
 lexer.cmo : parser.cmi ast.cmi

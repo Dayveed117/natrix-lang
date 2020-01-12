@@ -1,0 +1,8 @@
+// b tem que ser um intervalo
+
+var b : int = 5;
+
+foreach a in b do {
+    print(a)
+}
+

@@ -12,13 +12,13 @@ type utypes =
 
 type binop =
   | Badd | Bsub | Bmul | Bdiv
-  | Beq | Bneq | Blt | Ble | Bgt | Bge (* comparação estrutural *)
+  | Beq | Bneq | Blt | Ble | Bgt | Bge 
   | Band | Bor 
 
 type cnstt =
   | Cint of int
-  | Cmaxint of int
-  | Cminint of int
+  | Cmaxint
+  | Cminint
   
 type expr =
   | Ecst of cnstt

@@ -1,0 +1,10 @@
+// Fact(6)
+
+var x : int = 6;
+var acc : int = 1;
+
+foreach a in [1 .. x] do {
+    acc := acc * a
+}
+
+print(acc);

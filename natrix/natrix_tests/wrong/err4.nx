@@ -1,0 +1,4 @@
+// Erro de sintaxe
+// Não reconhece o token vara
+
+vara a : int = 4;

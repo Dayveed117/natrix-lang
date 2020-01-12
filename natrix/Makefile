@@ -3,6 +3,9 @@ GENERATED = ast.cmi lexer.ml parser.ml parser.mli
 BIN= natrix
 FLAGS= -annot -g
 
+all: natrix
+	./natrix test.py
+
 natrix: $(CMO)
 	ocamlc $(FLAGS) -o $@ nums.cma $(CMO)
 

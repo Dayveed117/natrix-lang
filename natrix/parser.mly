@@ -10,6 +10,7 @@
 %token IF THEN ELSE PRINT FOREACH IN DO DDOT OR AND FILLED BY OF
 %token EOF 
 %token TYPE INT LP RP LSB RSB LCB RCB EQUALS VAR COLON SEMICOLON COLONEQ
+%token MAXINT MININT
 %token PLUS MINUS TIMES DIV
 
 (* Prioridades *)
@@ -37,6 +38,8 @@ prog:
 expr:
 | c = CST
   { Ecst c }
+| mm = minmax
+  { Ecst mm }
 | var = id
   { Eident var }
 | MINUS e1 = expr %prec unary_minus
@@ -73,6 +76,11 @@ mytypes:
 
 id:
   ident = ID { ident }
+;
+
+%inline minmax:
+| MININT { Cminint }
+| MAXINT { Cmaxint }
 ;
 
 %inline binop:

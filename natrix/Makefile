@@ -1,6 +1,7 @@
-CMO=lexer.cmo parser.cmo
-GENERATED = lexer.ml parser.ml parser.mli
-FLAGS=-annot -g
+CMO= lexer.cmo parser.cmo interpretador.cmo main.cmo
+GENERATED = ast.cmi lexer.ml parser.ml parser.mli
+BIN= natrix
+FLAGS= -annot -g
 
 natrix: $(CMO)
 	ocamlc $(FLAGS) -o $@ nums.cma $(CMO)
@@ -17,10 +18,14 @@ natrix: $(CMO)
 	ocamllex $<
 
 .mly.ml:
-	menhir -v $<
+	menhir -v --infer $<
 
 .mly.mli:
-	menhir -v $<
+	menhir -v --infer $<
+
+clean:
+	rm -f *.cm[io] *.o *.annot *~ natrix $(GENERATED)
+	rm -f parser.output parser.automaton
 
 .depend depend:$(GENERATED)
 	rm -f .depend

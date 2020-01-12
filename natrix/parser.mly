@@ -52,15 +52,15 @@ stmt:
   { Sif (c, r) }
 | IF c = expr THEN LCB r1 = routine RCB ELSE LCB r2 = routine RCB
   { Sife (c, r1, r2) }
-| FOREACH x = id IN e = expr DO LCB r = routine RCB
-  { Sforeach (x, e, r) }
+| FOREACH var = id IN e = expr DO LCB r = routine RCB
+  { Sforeach (var, e, r) }
 ;
 
 routine:
-| VAR x = id COLON ty = mytypes EQUALS e = expr SEMICOLON
-  { Svar (x, ty, e) }
-| x = id COLONEQ e = expr SEMICOLON
-  { Sind (x, e) }
+| VAR var = id COLON ty = mytypes EQUALS e = expr SEMICOLON
+  { Svar (var, ty, e) }
+| var = id COLONEQ e = expr SEMICOLON
+  { Sind (var, e) }
 | PRINT LP e = expr RP SEMICOLON
   { Sprint e }
 ;

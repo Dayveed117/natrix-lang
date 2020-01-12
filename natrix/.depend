@@ -1,7 +1,9 @@
-interpretador.cmo :
-interpretador.cmx :
+interpretador.cmo : ast.cmi
+interpretador.cmx : ast.cmi
 lexer.cmo : parser.cmi ast.cmi
 lexer.cmx : parser.cmx ast.cmi
+main.cmo : parser.cmi lexer.cmo interpretador.cmo
+main.cmx : parser.cmx lexer.cmx interpretador.cmx
 parser.cmo : ast.cmi parser.cmi
 parser.cmx : ast.cmi parser.cmi
 ast.cmi :

@@ -16,7 +16,6 @@ type binop =
   | Band | Bor 
 
 type cnstt =
-  | Cbool of bool
   | Cint of int
   | Cmaxint of int
   | Cminint of int

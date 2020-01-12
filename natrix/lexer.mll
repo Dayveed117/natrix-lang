@@ -23,8 +23,7 @@
        "filled", FILLED;
        "by", BY;
        "of", OF;
-       "true", CST (Cbool true);
-       "false", CST (Cbool false);];
+       ];
    fun s -> try Hashtbl.find h s with Not_found -> ID s
 
    let string_buffer = Buffer.create 1024

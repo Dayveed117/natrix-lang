@@ -6,5 +6,8 @@ main.cmo : parser.cmi lexer.cmo interpretador.cmo
 main.cmx : parser.cmx lexer.cmx interpretador.cmx
 parser.cmo : ast.cmi parser.cmi
 parser.cmx : ast.cmi parser.cmi
+x86_64.cmo : x86_64.cmi
+x86_64.cmx : x86_64.cmi
 ast.cmi :
 parser.cmi : ast.cmi
+x86_64.cmi :

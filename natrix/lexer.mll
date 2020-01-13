@@ -20,9 +20,6 @@
        "foreach", FOREACH;
        "in", IN;
        "do", DO;
-       "filled", FILLED;
-       "by", BY;
-       "of", OF;
        ];
    fun s -> try Hashtbl.find h s with Not_found -> ID s
 

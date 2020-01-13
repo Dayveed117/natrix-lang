@@ -7,7 +7,7 @@
 %token <Ast.cnstt> CST
 %token <Ast.binop> CMP
 %token <string> ID
-%token IF THEN ELSE PRINT FOREACH IN DO DDOT OR AND FILLED BY OF
+%token IF THEN ELSE PRINT FOREACH IN DO DDOT OR AND
 %token EOF 
 %token TYPE INT LP RP LSB RSB LCB RCB EQUALS VAR COLON SEMICOLON COLONEQ
 %token MAXINT MININT
@@ -46,6 +46,8 @@ expr:
   { Eunop (Uneg, e1) }
 | e1 = expr o = binop e2 = expr
   { Ebinop (o, e1, e2) }
+| LSB e1 = expr DDOT e2 = expr RSB 
+  { Einterval (e1, e2) }
 ;
 
 stmt:
@@ -57,6 +59,8 @@ stmt:
   { Sife (c, r1, r2) }
 | FOREACH var = id IN e = expr DO LCB r = routine RCB
   { Sforeach (var, e, r) }
+| TYPE x = id EQUALS e = expr SEMICOLON
+  { Stype (x, e) }
 ;
 
 routine:
@@ -73,6 +77,7 @@ mytypes:
   { Uint }
 | t = id
   { Uid t }
+;
 
 id:
   ident = ID { ident }

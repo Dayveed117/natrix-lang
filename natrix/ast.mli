@@ -12,8 +12,8 @@ type utypes =
 
 type binop =
   | Badd | Bsub | Bmul | Bdiv
-  | Beq | Bneq | Blt | Ble | Bgt | Bge 
-  | Band | Bor 
+  | Beq | Bneq | Blt | Ble | Bgt | Bge
+  | Band | Bor
 
 type cnstt =
   | Cint of int
@@ -25,6 +25,7 @@ type expr =
   | Eident of id
   | Ebinop of binop * expr * expr
   | Eunop of unop * expr
+  | Einterval of expr * expr
 
 and stmt =
   | Sif of expr * stmt
@@ -33,5 +34,6 @@ and stmt =
   | Svar of id * utypes * expr
   | Sind of id * expr
   | Sprint of expr
+  | Stype of id * expr
   
 and prog = stmt list

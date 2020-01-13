@@ -28,9 +28,9 @@ let compile_expr =
       movq (imm i) !%rax ++
       pushq %rax
     | Ecst (Cmaxint) ->
-
+      (* introduzir 64bit int? *)
     | Ecst (Cminint) ->
-        
+      (* introduzir 64bit int? *)
     | Eident id -> 
       begin
         try
@@ -59,7 +59,7 @@ let compile_expr =
         | Bdiv -> assert false
       in
     | Eunop (si, e) ->
-
+      (* Fazer numeros negativos *)
 
 
 let compile_stmt = function
